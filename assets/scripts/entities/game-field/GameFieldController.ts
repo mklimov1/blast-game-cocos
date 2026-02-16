@@ -79,8 +79,6 @@ export class GameFieldController extends Component {
     this.view.disable();
   }
 
-  // --- Анимации ---
-
   private async destroyChipsAnimation(chips: Chip[]): Promise<void> {
     const promises = chips.map((chip) => {
       return new Promise<void>((resolve) => {
@@ -116,7 +114,7 @@ export class GameFieldController extends Component {
     if (animation === 'none') return;
 
     if (animation === 'fade') {
-      // TODO: UIOpacity анимация
+      // TODO: opacity animation
       return;
     }
 
@@ -156,8 +154,6 @@ export class GameFieldController extends Component {
 
     await Promise.all(promises);
   }
-
-  // --- Логика ---
 
   private findConnectedChips(chip: Chip): Chip[] {
     return findConnected(this.model.getGrid(), chip.row, chip.col);
@@ -234,8 +230,6 @@ export class GameFieldController extends Component {
       this.enable();
     }
   }
-
-  // --- События ---
 
   private attachEvents() {
     this.view.node.on('chip-click', this.handleChipClick, this);
