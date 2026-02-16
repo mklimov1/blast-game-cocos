@@ -1,7 +1,8 @@
-import { findConnectedColor } from './findConnectedColor';
-import { findConnectedPower } from './findConnectedPower';
-import { ChipKind, type Grid } from '../../types';
-import { Chip } from '../entities/Chip';
+import { findConnectedColor } from './findConnectedColor.ts';
+import { findConnectedPower } from './findConnectedPower.ts';
+import { ChipKind } from '../../../chip/types.ts';
+import { Chip } from './../../../chip/Chip.ts';
+import { Grid } from '../../types.ts';
 
 export const findConnected = (
   grid: Grid,
@@ -15,7 +16,7 @@ export const findConnected = (
   const chip = grid[startRow][startCol];
   if (!chip) return [];
 
-  if (chip.kind === ChipKind.POWER) {
+  if (chip.data.kind === ChipKind.POWER) {
     return findConnectedPower(grid, startRow, startCol);
   }
 

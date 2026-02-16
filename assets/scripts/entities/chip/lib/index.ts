@@ -1,4 +1,4 @@
-import { ChipColor } from '../types';
+import { ChipColor } from '../types.ts';
 
 const COLORS = Object.values(ChipColor);
 

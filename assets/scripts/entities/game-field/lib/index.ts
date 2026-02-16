@@ -1,3 +1,3 @@
-export { sortByDistance } from './sortByDistance';
-export { hasAvailableMoves } from './hasAvailableMoves';
-export { findConnected } from './findConnected/findConnected';
+export { sortByDistance } from './sortByDistance.ts';
+export { hasAvailableMoves } from './hasAvailableMoves.ts';
+export { findConnected } from './findConnected/findConnected.ts';

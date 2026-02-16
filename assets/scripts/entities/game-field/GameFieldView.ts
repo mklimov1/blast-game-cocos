@@ -11,16 +11,16 @@ import {
   v2,
   Vec2,
 } from 'cc';
-import { Chip } from '../chip/Chip';
-import { GameField } from './GameField';
+import { Chip } from '../chip/Chip.ts';
+import { GameField } from './GameField.ts';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('GameFieldView')
 export class GameFieldView extends Component {
   @property(Prefab) chipPrefab: Prefab = null!;
-  @property chipSize: number = 80;
-  @property gap: number = 4;
+  @property chipSize: number = 200;
+  @property gap: number = 0;
 
   private chipContainer: Node = null!;
   private chipNodeMap: Map<string, Node> = new Map();
@@ -49,6 +49,9 @@ export class GameFieldView extends Component {
       this.chipContainer.addChild(chip.node);
       this.chipNodeMap.set(chip.chipId, chip.node);
     });
+
+    console.log('First chip pos:', chips[0]?.node.position);
+    console.log('Last chip pos:', chips[chips.length - 1]?.node.position);
   }
 
   removeChips(...ids: string[]) {

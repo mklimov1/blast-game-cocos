@@ -1,6 +1,6 @@
 import { _decorator, Component, Sprite, SpriteFrame, resources } from 'cc';
-import { ChipData, ChipKind, ChipColor } from './types';
-import { CHIP_SPRITE_PATHS } from './constants';
+import { ChipData, ChipKind, ChipColor } from './types.ts';
+import { CHIP_SPRITE_PATHS } from './constants.ts';
 
 const { ccclass } = _decorator;
 
@@ -52,12 +52,22 @@ export class Chip extends Component {
 
   private updateVisual() {
     const sprite = this.getComponent(Sprite);
-    if (!sprite) return;
+    if (!sprite) {
+      console.error('No Sprite component on chip node!');
+      return;
+    }
 
     const key = this._data.kind === ChipKind.COLOR ? this._data.color : this._data.power;
+    const path = CHIP_SPRITE_PATHS[key];
+    console.log('Loading sprite:', path);
 
-    resources.load(CHIP_SPRITE_PATHS[key], SpriteFrame, (err, spriteFrame) => {
-      if (!err) sprite.spriteFrame = spriteFrame;
+    resources.load(path, SpriteFrame, (err, spriteFrame) => {
+      if (err) {
+        console.error('Failed to load sprite:', path, err);
+        return;
+      }
+      console.log('Sprite loaded:', path);
+      sprite.spriteFrame = spriteFrame;
     });
   }
 }

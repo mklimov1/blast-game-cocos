@@ -1,9 +1,9 @@
 import { _decorator, Component, Prefab, tween, v3 } from 'cc';
-import { GameField } from './GameField';
-import { GameFieldView } from './GameFieldView';
-import { Chip } from '../chip/Chip';
-import { ChipKind, ChipPower } from '../chip/types';
-import { sortByDistance, findConnected, hasAvailableMoves } from './lib';
+import { GameField } from './GameField.ts';
+import { GameFieldView } from './GameFieldView.ts';
+import { Chip } from '../chip/Chip.ts';
+import { ChipKind, ChipPower } from '../chip/types.ts';
+import { sortByDistance, findConnected, hasAvailableMoves } from './lib/index.ts';
 import {
   MIN_ROWS,
   MAX_ROWS,
@@ -12,7 +12,7 @@ import {
   MIN_UNIQUE_CHIPS,
   MAX_UNIQUE_CHIPS,
   POWER_CHIP_THRESHOLD,
-} from '../../shared/constants';
+} from '../../shared/constants.ts';
 
 const { ccclass, property } = _decorator;
 
@@ -26,13 +26,20 @@ type FieldOptions = {
 @ccclass('GameFieldController')
 export class GameFieldController extends Component {
   @property(Prefab) chipPrefab: Prefab = null!;
-  @property(GameFieldView) view: GameFieldView = null!;
 
+  private view: GameFieldView = null!;
   private model: GameField = new GameField();
   private isInitialized: boolean = false;
   private isProcessing: boolean = false;
 
   async setup(options: FieldOptions) {
+    this.view = this.getComponent(GameFieldView)!;
+
+    if (!this.view) {
+      console.error('GameFieldView not found on this node!');
+      return;
+    }
+
     this.validateFieldOptions(options);
 
     this.model.init(this.chipPrefab, options.rows, options.cols, options.uniqueChipsCount);

@@ -1,4 +1,4 @@
-import { Chip } from '../chip/Chip';
+import { Chip } from '../chip/Chip.ts';
 
 export type Grid = (Chip | null)[][];
 

@@ -1,6 +1,6 @@
 import { instantiate, Prefab } from 'cc';
-import { ChipData } from '../entities/chip/types';
-import { Chip } from '../entities/chip/Chip';
+import { ChipData } from '../../entities/chip/types.ts';
+import { Chip } from '../../entities/chip/Chip.ts';
 
 export const createChip = (
   prefab: Prefab,

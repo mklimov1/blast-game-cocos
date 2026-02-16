@@ -1,6 +1,7 @@
-import { findConnectedPower } from './findConnectedPower';
-import { ChipPower, type Grid, type Position } from '../../types';
-import { Chip } from '../entities/Chip';
+import { findConnectedPower } from './findConnectedPower.ts';
+import { type Grid, type Position } from '../../types.ts';
+import { Chip } from './../../../chip/Chip.ts';
+import { ChipKind, ChipPower } from '../../../chip/types.ts';
 
 export const findConnectedBomb = (
   grid: Grid,
@@ -15,7 +16,7 @@ export const findConnectedBomb = (
 
   const bomb = grid[startRow][startCol];
   if (!bomb) return [];
-  if (bomb.type !== ChipPower.BOMB) return [];
+  if (bomb.data.kind === ChipKind.POWER && bomb.data.power !== ChipPower.BOMB) return [];
 
   const neighbors: Position[] = [
     { row: startRow - 1, col: startCol },

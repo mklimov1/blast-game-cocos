@@ -1,4 +1,4 @@
-import { ChipColor, ChipPower } from './types';
+import { ChipColor, ChipPower } from './types.ts';
 
 export const CHIP_SPRITE_PATHS: Record<ChipColor | ChipPower, string> = {
   [ChipColor.RED]: 'sprites/chips/red/spriteFrame',

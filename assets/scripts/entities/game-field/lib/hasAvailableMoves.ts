@@ -1,6 +1,6 @@
-import { findConnected } from './findConnected/findConnected';
+import { findConnected } from './findConnected/findConnected.ts';
 
-import type { Grid } from '../types';
+import type { Grid } from '../types.ts';
 
 export const hasAvailableMoves = (grid: Grid): boolean => {
   for (let row = 0; row < grid.length; row++) {

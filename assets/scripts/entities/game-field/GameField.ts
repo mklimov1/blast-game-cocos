@@ -1,11 +1,11 @@
 import { Prefab } from 'cc';
-import { Grid } from './types';
-import { Chip } from '../chip/Chip';
-import { ChipData, ChipKind } from '../chip/types';
-import { uid } from '../../shared/utils/uid';
-import { createChip } from '../../shared/utils';
-import { getColorByIndex, getRandomBlockColor } from '../chip/lib';
-import { shuffleArray } from '../../shared/utils/shuffle';
+import { Grid } from './types.ts';
+import { Chip } from '../chip/Chip.ts';
+import { ChipData, ChipKind } from '../chip/types.ts';
+import { uid } from '../../shared/utils/uid.ts';
+import { createChip } from '../../shared/utils/index.ts';
+import { getColorByIndex, getRandomBlockColor } from '../chip/lib/index.ts';
+import { shuffleArray } from '../../shared/utils/shuffle.ts';
 
 export class GameField {
   private chipPrefab: Prefab = null;

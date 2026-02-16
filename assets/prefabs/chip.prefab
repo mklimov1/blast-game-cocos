@@ -76,8 +76,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
+      "width": 200,
+      "height": 200
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -130,7 +130,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "000EUIwKhLr5oeP4SW5WU4"
+    "fileId": "f4a/EUlIZIsrtnK/qZpvHO"
   },
   {
     "__type__": "fc0d0OmcVZBbZvcUHnEqjba",
@@ -159,6 +159,7 @@
       "__id__": 0
     },
     "fileId": "4d4NKtTyJJ8pQFUF86Eb0B",
+    "instance": null,
     "targetOverrides": null
   }
 ]
