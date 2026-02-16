@@ -1,0 +1,21 @@
+{
+  "name": "BlastGameCocos",
+  "uuid": "6453b93a-7fa9-4672-a6b1-5ef5b9df5c55",
+  "creator": {
+    "version": "3.8.7"
+  },
+  "scripts": {
+    "lint": "eslint assets/**/*.ts",
+    "lint:fix": "eslint assets/**/*.ts --fix",
+    "format": "prettier --write \"assets/**/*.ts\""
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
+    "eslint": "^10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1",
+    "typescript-eslint": "^8.56.0"
+  }
+}
