@@ -1,0 +1,8 @@
+{
+  "level": 4,
+  "rows": 7,
+  "cols": 8,
+  "uniqueChipsCount": 5,
+  "goal": 130,
+  "steps": 25
+}
