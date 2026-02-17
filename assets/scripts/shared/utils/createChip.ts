@@ -8,9 +8,11 @@ export const createChip = (
   data: ChipData,
   row: number,
   col: number,
+  size: number,
 ): Chip => {
   const node = instantiate(prefab);
   const chip = node.getComponent(Chip)!;
   chip.init(id, data, row, col);
+  chip.setSize(size);
   return chip;
 };

@@ -42,7 +42,13 @@ export class GameFieldController extends Component {
 
     this.validateFieldOptions(options);
 
-    this.model.init(this.chipPrefab, options.rows, options.cols, options.uniqueChipsCount);
+    this.model.init(
+      this.chipPrefab,
+      options.rows,
+      options.cols,
+      options.uniqueChipsCount,
+      this.view.chipSize,
+    );
     this.view.init(this.model);
     this.view.setup(options.rows, options.cols);
 
@@ -52,6 +58,7 @@ export class GameFieldController extends Component {
     await this.checkAndShuffleIfNeeded();
 
     this.attachEvents();
+    this.enable();
     this.isInitialized = true;
   }
 

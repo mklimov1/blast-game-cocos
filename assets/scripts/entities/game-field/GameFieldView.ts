@@ -19,8 +19,8 @@ const { ccclass, property } = _decorator;
 @ccclass('GameFieldView')
 export class GameFieldView extends Component {
   @property(Prefab) chipPrefab: Prefab = null!;
-  @property chipSize: number = 200;
-  @property gap: number = 0;
+  @property chipSize: number = 100;
+  @property gap: Vec2 = v2(0, 0);
 
   private chipContainer: Node = null!;
   private chipNodeMap: Map<string, Node> = new Map();
@@ -45,13 +45,24 @@ export class GameFieldView extends Component {
 
   addChips(...chips: Chip[]) {
     chips.forEach((chip) => {
-      chip.node.setPosition(this.gridToWorld(chip.row, chip.col));
+      this.updateChipPosition(chip, chip.row, chip.col);
       this.chipContainer.addChild(chip.node);
       this.chipNodeMap.set(chip.chipId, chip.node);
     });
 
-    console.log('First chip pos:', chips[0]?.node.position);
-    console.log('Last chip pos:', chips[chips.length - 1]?.node.position);
+    this.sortByRow();
+  }
+
+  private sortByRow() {
+    const children = [...this.chipContainer.children];
+    children
+      .sort((a, b) => {
+        const chipA = a.getComponent(Chip);
+        const chipB = b.getComponent(Chip);
+        if (!chipA || !chipB) return 0;
+        return chipB.row - chipA.row;
+      })
+      .forEach((child, i) => child.setSiblingIndex(i));
   }
 
   removeChips(...ids: string[]) {
@@ -79,25 +90,27 @@ export class GameFieldView extends Component {
   }
 
   setup(rows: number, cols: number) {
-    const step = this.chipSize + this.gap;
+    const stepX = this.chipSize + this.gap.x;
+    const stepY = this.chipSize + this.gap.y;
     const uiTransform = this.node.getComponent(UITransform) || this.node.addComponent(UITransform);
 
-    uiTransform.setContentSize(new Size(cols * step, rows * step));
+    uiTransform.setContentSize(new Size(cols * stepX, rows * stepY));
   }
 
   gridToWorld(row: number, col: number): Vec3 {
-    const step = this.chipSize + this.gap;
-    const offsetX = (-(this.model.cols - 1) * step) / 2;
-    const offsetY = ((this.model.rows - 1) * step) / 2;
+    const stepX = this.chipSize + this.gap.x;
+    const stepY = this.chipSize + this.gap.y;
+    const offsetX = (-(this.model.cols - 1) * stepX) / 2;
+    const offsetY = ((this.model.rows - 1) * stepY) / 2;
 
-    return v3(offsetX + col * step, offsetY - row * step, 0);
+    const x = offsetX + col * stepX;
+    const y = offsetY - row * stepY;
+
+    return v3(x, y, 0);
   }
 
-  updateChipPosition(chip: Chip) {
-    const node = this.chipNodeMap.get(chip.chipId);
-    if (node) {
-      node.setPosition(this.gridToWorld(chip.row, chip.col));
-    }
+  updateChipPosition(chip: Chip, row: number, col: number) {
+    chip.node.setPosition(this.gridToWorld(row, col));
   }
 
   private onTouchStart(event: EventTouch) {

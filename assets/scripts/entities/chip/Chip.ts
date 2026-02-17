@@ -1,4 +1,4 @@
-import { _decorator, Component, Sprite, SpriteFrame, resources } from 'cc';
+import { _decorator, Component, Sprite, SpriteFrame, resources, UITransform } from 'cc';
 import { ChipData, ChipKind, ChipColor } from './types.ts';
 import { CHIP_SPRITE_PATHS } from './constants.ts';
 
@@ -50,6 +50,10 @@ export class Chip extends Component {
     this.updateVisual();
   }
 
+  setSize(size: number) {
+    this.node.getComponent(UITransform)?.setContentSize(size, size);
+  }
+
   private updateVisual() {
     const sprite = this.getComponent(Sprite);
     if (!sprite) {
@@ -68,6 +72,7 @@ export class Chip extends Component {
       }
       console.log('Sprite loaded:', path);
       sprite.spriteFrame = spriteFrame;
+      sprite.sizeMode = Sprite.SizeMode.CUSTOM;
     });
   }
 }

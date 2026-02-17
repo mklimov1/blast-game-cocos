@@ -20,11 +20,14 @@ export class GameField {
 
   private chipMap: Map<string, Chip> = new Map();
 
-  init(prefab: Prefab, rows: number, cols: number, uniqueChipsCount: number) {
+  private chipSize!: number;
+
+  init(prefab: Prefab, rows: number, cols: number, uniqueChipsCount: number, chipSize: number) {
     this.chipPrefab = prefab;
     this.rows = rows;
     this.cols = cols;
     this.uniqueChipsCount = uniqueChipsCount;
+    this.chipSize = chipSize;
 
     this.grid = Array.from({ length: rows }, () => Array(cols).fill(null));
   }
@@ -40,7 +43,7 @@ export class GameField {
   add(chipData: ChipData, row: number, col: number) {
     if (this.getByCoords(row, col)) return;
 
-    const chip = createChip(this.chipPrefab, uid(), chipData, row, col);
+    const chip = createChip(this.chipPrefab, uid(), chipData, row, col, this.chipSize);
     this.chipMap.set(chip.chipId, chip);
     this.grid[row][col] = chip;
 
@@ -65,6 +68,7 @@ export class GameField {
             { kind: ChipKind.COLOR, color },
             rowIndex,
             colIndex,
+            this.chipSize,
           );
           newChips.push(block);
           this.chipMap.set(block.chipId, block);
