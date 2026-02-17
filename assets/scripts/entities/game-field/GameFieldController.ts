@@ -13,6 +13,7 @@ import {
   MAX_UNIQUE_CHIPS,
   POWER_CHIP_THRESHOLD,
 } from '../../shared/constants.ts';
+import { fadeIn } from '../../shared/animations/fade.ts';
 
 const { ccclass, property } = _decorator;
 
@@ -105,7 +106,7 @@ export class GameFieldController extends Component {
       const targetPos = this.view.gridToWorld(chip.row, chip.col);
       return new Promise<void>((resolve) => {
         tween(chip.node)
-          .to(0.3, { position: targetPos }, { easing: 'quartInOut' })
+          .to(0.1, { position: targetPos }, { easing: 'quartInOut' })
           .call(() => resolve())
           .start();
       });
@@ -121,17 +122,18 @@ export class GameFieldController extends Component {
     if (animation === 'none') return;
 
     if (animation === 'fade') {
-      // TODO: opacity animation
+      const promises = chips.map((chip) => fadeIn(chip.node, 0.1));
+      await Promise.all(promises);
       return;
     }
 
     if (animation === 'drop') {
       const promises = chips.map((chip) => {
         const targetPos = chip.node.position.clone();
-        chip.node.setPosition(v3(targetPos.x, targetPos.y + 200, 0));
+        chip.node.setPosition(v3(targetPos.x, targetPos.y + this.view.chipSize, 0));
         return new Promise<void>((resolve) => {
           tween(chip.node)
-            .to(0.4, { position: targetPos }, { easing: 'quartInOut' })
+            .to(0.1, { position: targetPos }, { easing: 'quartIn' })
             .call(() => resolve())
             .start();
         });
