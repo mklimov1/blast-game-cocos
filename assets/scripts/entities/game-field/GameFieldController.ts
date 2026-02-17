@@ -105,7 +105,7 @@ export class GameFieldController extends Component {
       const targetPos = this.view.gridToWorld(chip.row, chip.col);
       return new Promise<void>((resolve) => {
         tween(chip.node)
-          .to(0.3, { position: targetPos }, { easing: 'bounceOut' })
+          .to(0.3, { position: targetPos }, { easing: 'quartInOut' })
           .call(() => resolve())
           .start();
       });
@@ -131,7 +131,7 @@ export class GameFieldController extends Component {
         chip.node.setPosition(v3(targetPos.x, targetPos.y + 200, 0));
         return new Promise<void>((resolve) => {
           tween(chip.node)
-            .to(0.4, { position: targetPos }, { easing: 'bounceOut' })
+            .to(0.4, { position: targetPos }, { easing: 'quartInOut' })
             .call(() => resolve())
             .start();
         });
