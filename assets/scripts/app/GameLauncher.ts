@@ -13,10 +13,6 @@ export class GameLauncher extends Component {
         cols: 9,
         uniqueChipsCount: 5,
       });
-
-      console.log('Children count:', this.node.children.length);
-      console.log('First child pos:', this.node.children[0]?.position);
-      console.log('ChipContainer children:', this.node.children[0]?.children.length);
     }
   }
 }

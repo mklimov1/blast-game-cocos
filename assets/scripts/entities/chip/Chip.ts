@@ -63,14 +63,12 @@ export class Chip extends Component {
 
     const key = this._data.kind === ChipKind.COLOR ? this._data.color : this._data.power;
     const path = CHIP_SPRITE_PATHS[key];
-    console.log('Loading sprite:', path);
 
     resources.load(path, SpriteFrame, (err, spriteFrame) => {
       if (err) {
         console.error('Failed to load sprite:', path, err);
         return;
       }
-      console.log('Sprite loaded:', path);
       sprite.spriteFrame = spriteFrame;
       sprite.sizeMode = Sprite.SizeMode.CUSTOM;
     });
